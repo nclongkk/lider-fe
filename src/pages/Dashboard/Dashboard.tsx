@@ -209,7 +209,17 @@ const Dashboard: React.FC = () => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
-          <div className={"px-4"}>
+          <div className={"px-4 flex space-x-4"}>
+            <a
+              href="https://docs-lider.it-pfiev-dut.tech/"
+              style={{
+                fontSize: "18px",
+                fontWeight: 500,
+                color: "#00000096",
+              }}
+            >
+              Docs
+            </a>
             {userInfo && <UserLogout user={userInfo}></UserLogout>}
           </div>
         </Header>

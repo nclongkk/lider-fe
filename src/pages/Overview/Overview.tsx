@@ -185,7 +185,7 @@ const Overview: React.FC = () => {
               }}
             >
               {totalAmountLoading && <LoadingOutlined />}
-              {totalAmount && totalAmount["Amount Out"]}
+              {totalAmount && (totalAmount["Amount Out"] || 0)}
             </p>
             <p
               style={{

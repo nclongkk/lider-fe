@@ -90,6 +90,22 @@ const InitLiderModel: React.FC = () => {
             <CopyOutlined />
           </Button>
         </div>
+        <div
+          style={{
+            marginTop: "16px",
+          }}
+        >
+          <a
+            href="https://docs-lider.it-pfiev-dut.tech/"
+            style={{
+              fontSize: "18px",
+              fontWeight: 500,
+              color: "#010085",
+            }}
+          >
+            Click here to see full document
+          </a>
+        </div>
       </div>
     </div>
   );

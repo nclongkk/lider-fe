@@ -35,7 +35,19 @@ const MeetingFrequency: React.FC = () => {
     },
   };
 
-  return <Line {...config} />;
+  return (
+  <div>
+    <h2>Payment Histories</h2>
+    <div 
+      style= {{
+        height: "400px",
+        marginTop: "20px"
+      }}
+    >
+      <Line {...config} />
+    </div>
+  </div>
+  );
 };
 
 export default MeetingFrequency;
