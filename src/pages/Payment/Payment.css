@@ -1,0 +1,19 @@
+.title {
+  width: 79px;
+  height: 28px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+
+  color: #02012d;
+}
+
+.ant-tabs-ink-bar {
+  background: #010085 !important;
+}
+
+.ant-tabs-tab-btn {
+  color: #010085 !important;
+}

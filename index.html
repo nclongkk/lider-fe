@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lider as a Service</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      src="https://www.paypal.com/sdk/js?client-id=AYmlCGgWocwaRKG_5Idtyuf04fAkzyrfBzHg84Cze1UW_PEv2_w2OAeo5AILslK-zch4uopw2BEYuRDm"
+      data-namespace="paypal_sdk"
+    ></script>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const global = globalThis;
+    </script>
+  </body>
+</html>

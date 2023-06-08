@@ -1,0 +1,35 @@
+.status-done {
+  color: #00b300;
+  background-color: #00b30020;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #00b30040;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-done-span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #00b300;
+}
+
+.status-pending {
+  color: #ff9900;
+  background-color: #ff990020;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #ff990040;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-pending-span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff9900;
+}

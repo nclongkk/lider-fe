@@ -1,0 +1,37 @@
+.add-card-modal__input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.add-card-modal {
+  margin-top: 20px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.add-card-expiry-cvc {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.input-number {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.ant-input-number-input::-webkit-outer-spin-button,
+.ant-input-number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+.credit-card-input {
+  height: 40px !important;
+}

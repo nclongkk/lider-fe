@@ -1,0 +1,40 @@
+.ant-steps.ant-steps-vertical > .ant-steps-item .ant-steps-item-icon {
+  background-color: #010085;
+  border-color: #010085 !important;
+}
+
+.ant-steps.ant-steps-vertical > .ant-steps-item .ant-steps-item-icon {
+  color: #00000088 !important;
+}
+
+.ant-steps.ant-steps-vertical > .ant-steps-item .ant-steps-item-icon {
+  color: #ffffff !important;
+}
+
+.ant-steps-icon {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.ant-steps-item-title {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+.ant-steps-item-description {
+  color: #000000 !important;
+}
+
+.ant-collapse {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.ant-collapse-header-text {
+  font-size: large !important;
+  font-weight: bold !important;
+}
+
+.ant-collapse-content {
+  border-top: 1px solid #ffffff !important;
+}
