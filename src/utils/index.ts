@@ -1,4 +1,3 @@
-import { io } from "socket.io-client";
 import mastercard from "../assets/mastercard.png";
 import visa from "../assets/visa.png";
 import amex from "../assets/amex.png";
