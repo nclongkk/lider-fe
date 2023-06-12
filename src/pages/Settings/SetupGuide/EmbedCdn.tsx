@@ -4,7 +4,8 @@ import { Button } from "antd";
 const EmbedCdn: React.FC = () => {
   const copyToClipboard = () => {
     const el = document.createElement("textarea");
-    el.value = '<script src="https://localhost:5001/public-sdk.js"></script>';
+    el.value =
+      '<script src="https://meet-lider.it-pfiev-dut.tech/public-sdk.js"></script>';
     document.body.appendChild(el);
     el.select();
     document.execCommand("copy");
@@ -37,7 +38,9 @@ const EmbedCdn: React.FC = () => {
             borderBottomLeftRadius: "8px",
           }}
         >
-          {'<script src="https://localhost:5001/public-sdk.js"></script>'}
+          {
+            '<script src="https://meet-lider.it-pfiev-dut.tech/public-sdk.js"></script>'
+          }
         </p>
         <Button
           style={{

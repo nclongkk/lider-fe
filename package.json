@@ -24,7 +24,6 @@
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.4.5",
-    "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.9"
   },
   "devDependencies": {

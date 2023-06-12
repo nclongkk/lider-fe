@@ -1,5 +1,5 @@
 import React from "react";
-import { Column } from "@ant-design/charts";
+import { Column, ColumnConfig } from "@ant-design/charts";
 import { useQuery } from "@tanstack/react-query";
 import { getTimeFrequency } from "../../../api/app";
 
@@ -26,7 +26,7 @@ const MeetingTimeColumn: React.FC = () => {
     return <div>Error: Failed to fetch data</div>;
   }
 
-  const config = {
+  const config: ColumnConfig = {
     data: statisticTimeFrequenct,
     xField: "hour",
     yField: "duration",

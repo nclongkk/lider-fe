@@ -25,7 +25,7 @@ const StatisticPaymentColumn: React.FC = () => {
 
   useEffect(() => {
     if (statisticPayment && !statisticPaymentLoading) {
-      const config = {
+      const config: any = {
         data: statisticPayment,
         isGroup: true,
         xField: "date",
@@ -44,7 +44,7 @@ const StatisticPaymentColumn: React.FC = () => {
     }
   }, [statisticPayment, statisticPaymentLoading]);
 
-  const [config, setConfig] = useState(null);
+  const [config, setConfig] = useState<any>(null);
 
   const handleDateChange = (dates: any, dateStrings: string[]) => {
     setSelectedDateRange(dateStrings);
