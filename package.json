@@ -8,6 +8,12 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "overrides": {
+    "@ant-design/charts": {
+      "antd": "^5.3.1",
+      "@ant-design/icons": "^5.0.0"
+    }
+  },
   "dependencies": {
     "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^4.8.0",
