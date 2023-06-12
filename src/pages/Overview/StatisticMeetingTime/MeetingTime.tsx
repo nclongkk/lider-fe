@@ -1,7 +1,7 @@
 import React from "react";
-import { Column, ColumnConfig } from "@ant-design/charts";
 import { useQuery } from "@tanstack/react-query";
 import { getTimeFrequency } from "../../../api/app";
+import { Column, ColumnConfig } from "@ant-design/plots";
 
 const MeetingTimeColumn: React.FC = () => {
   const {

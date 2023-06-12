@@ -1,7 +1,7 @@
 import React from "react";
-import { Line } from "@ant-design/charts";
 import { getTimeFrequency, statisticMeeting } from "../../../api/app";
 import { useQuery } from "@tanstack/react-query";
+import { Line } from "@ant-design/plots";
 
 const MeetingFrequency: React.FC = () => {
   const currentDate: string = new Date().toISOString().split("T")[0];
@@ -36,17 +36,17 @@ const MeetingFrequency: React.FC = () => {
   };
 
   return (
-  <div>
-    <h2>Payment Histories</h2>
-    <div 
-      style= {{
-        height: "400px",
-        marginTop: "20px"
-      }}
-    >
-      <Line {...config} />
+    <div>
+      <h2>Payment Histories</h2>
+      <div
+        style={{
+          height: "400px",
+          marginTop: "20px",
+        }}
+      >
+        <Line {...config} />
+      </div>
     </div>
-  </div>
   );
 };
 
