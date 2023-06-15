@@ -1,3 +1,4 @@
+import { SearchOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import {
   Avatar,
@@ -8,11 +9,18 @@ import {
   Table,
   Tag,
   Typography,
+  Input,
+  DatePicker,
 } from "antd";
 import { useEffect, useState } from "react";
 import { getMeetingHistory } from "../../api/app";
 import { formatDateTime, getDurationString } from "../../utils";
 import "./MeetingHistory.css";
+import React from "react";
+
+const { RangePicker } = DatePicker;
+
+const { Search } = Input;
 
 const limitDefault = 10;
 const { Panel } = Collapse;
@@ -91,6 +99,13 @@ const columns = [
     },
   },
 ];
+
+interface ITabChoose {
+  ended: boolean;
+  inMeeting: boolean;
+  paid: boolean;
+  unpaid: boolean;
+}
 
 const MeetingHistoryTable = () => {
   const [data, setData] = useState([]);
@@ -384,6 +399,106 @@ const MeetingHistoryTable = () => {
   );
 };
 
+const TopActions: React.FC = () => {
+  // useEffect set color for tab when tabchoose change
+  const [tabChoose, setTabChoose] = useState<ITabChoose>({
+    ended: false,
+    inMeeting: false,
+    paid: false,
+    unpaid: false,
+  });
+  useEffect(() => {
+    console.log(tabChoose);
+    const { ended, inMeeting, paid, unpaid } = tabChoose;
+
+    if (ended) {
+      document.getElementById("tab-ended")?.classList.add("tab-clicked");
+    } else {
+      document.getElementById("tab-ended")?.classList.remove("tab-clicked");
+    }
+
+    if (inMeeting) {
+      document.getElementById("tab-in-meeting")?.classList.add("tab-clicked");
+    } else {
+      document
+        .getElementById("tab-in-meeting")
+        ?.classList.remove("tab-clicked");
+    }
+    if (paid) {
+      document.getElementById("tab-paid")?.classList.add("tab-clicked");
+    } else {
+      document.getElementById("tab-paid")?.classList.remove("tab-clicked");
+    }
+    if (unpaid) {
+      document.getElementById("tab-unpaid")?.classList.add("tab-clicked");
+    } else {
+      document.getElementById("tab-unpaid")?.classList.remove("tab-clicked");
+    }
+  }, [tabChoose]);
+
+  return (
+    <>
+      <div className="top-actions">
+        <div className="tab-list flex">
+          <button
+            id="tab-ended"
+            className="tab tab-clicked"
+            onClick={() =>
+              setTabChoose({ ...tabChoose, ended: !tabChoose.ended })
+            }
+          >
+            <span className="tab-title">Ended</span>
+          </button>
+          <button
+            id="tab-in-meeting"
+            className="tab"
+            onClick={() =>
+              setTabChoose({ ...tabChoose, inMeeting: !tabChoose.inMeeting })
+            }
+          >
+            <span className="tab-title">In meeting</span>
+          </button>
+          <button
+            id="tab-paid"
+            className="tab"
+            onClick={() =>
+              setTabChoose({ ...tabChoose, paid: !tabChoose.paid })
+            }
+          >
+            <span className="tab-title">Paid</span>
+          </button>
+          <button
+            id="tab-unpaid"
+            className="tab"
+            onClick={() =>
+              setTabChoose({ ...tabChoose, unpaid: !tabChoose.unpaid })
+            }
+          >
+            <span className="tab-title">Unpaid</span>
+          </button>
+        </div>
+        <button
+          className="tab"
+          onClick={() => {
+            document.getElementById("filter")?.classList.toggle("hidden");
+          }}
+        >
+          <SearchOutlined />
+        </button>
+      </div>
+      <div className="filter hidden" id="filter">
+        <Search
+          placeholder="Input your room Id"
+          allowClear
+          enterButton="Search"
+          style={{ width: 800 }}
+        />
+        <RangePicker />
+      </div>
+    </>
+  );
+};
+
 const MeetingHistory: React.FC = () => {
   return (
     <div
@@ -395,7 +510,8 @@ const MeetingHistory: React.FC = () => {
         marginLeft: "auto",
       }}
     >
-      <h2>Meeting History</h2>
+      <h2 className="my-10">Meeting History</h2>
+      <TopActions />
       <MeetingHistoryTable />
     </div>
   );

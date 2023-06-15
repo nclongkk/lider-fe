@@ -9,3 +9,70 @@
   font-size: 1px;
   color: #000000;
 }
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 12px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #ececec;
+  height: 64px;
+  background-color: #fff;
+}
+
+.tab-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff !important;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none !important;
+  /* background-color: #f6f6f6; */
+  font-size: 16px;
+  font-weight: 500;
+  color: #00000098;
+  margin: 0 8px;
+}
+.tab:hover {
+  background-color: #f6f6f6;
+  border-color: #fff !important;
+}
+
+.tab:focus,
+.tab:active {
+  background-color: #f6f6f6;
+  border: none !important;
+}
+
+.tab-clicked {
+  background-color: #f6f6f6 !important;
+  border: none !important;
+  border-width: 0px !important;
+}
+
+.button:hover {
+  border: none !important;
+}
+
+.filter {
+  height: 56px;
+  border-bottom: 1px solid #ececec;
+  overflow: auto;
+  background-color: #fff;
+  padding: 12px 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ant-btn-primary {
+  background-color: #010085 !important;
+}

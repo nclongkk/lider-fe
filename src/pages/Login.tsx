@@ -4,11 +4,13 @@ import { login } from "../api/auth";
 import { useRouter } from "../hooks/useRouter";
 import { setStorage } from "../utils";
 import logo from "../assets/logo.png";
+import { GoogleOutlined } from "@ant-design/icons";
 
 interface LoginForm {
   email: string;
   password: string;
 }
+
 export const Login = () => {
   const { navigate } = useRouter();
   const [loading, setLoading] = useState(false);
@@ -30,6 +32,11 @@ export const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    //Redirect to /api/auth/google
+    window.location.href = "/api/auth/google";
   };
 
   return (
@@ -94,9 +101,20 @@ export const Login = () => {
               </Button>
             </Form.Item>
           </div>
-          {/* </Form> */}
+          <div>
+            <Button
+              type="default"
+              onClick={handleGoogleLogin}
+              icon={<GoogleOutlined />}
+              className="bg-white border border-gray-300 w-full"
+            >
+              Login with Google
+            </Button>
+          </div>
         </div>
       </div>
     </Form>
   );
 };
+
+export default Login;
