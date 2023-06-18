@@ -39,6 +39,7 @@
   font-weight: 500;
   color: #00000098;
   margin: 0 8px;
+  outline: none !important;
 }
 .tab:hover {
   background-color: #f6f6f6;

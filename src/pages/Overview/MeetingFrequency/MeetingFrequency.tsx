@@ -37,7 +37,7 @@ const MeetingFrequency: React.FC = () => {
 
   return (
     <div>
-      <h2>Payment Histories</h2>
+      <h2>Meetings</h2>
       <div
         style={{
           height: "400px",

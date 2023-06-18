@@ -1,5 +1,5 @@
-import { SearchOutlined } from "@ant-design/icons";
-import { useQuery } from "@tanstack/react-query";
+import { ReloadOutlined, SearchOutlined } from "@ant-design/icons";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   Avatar,
   Collapse,
@@ -11,12 +11,14 @@ import {
   Typography,
   Input,
   DatePicker,
+  message,
 } from "antd";
 import { useEffect, useState } from "react";
 import { getMeetingHistory } from "../../api/app";
 import { formatDateTime, getDurationString } from "../../utils";
 import "./MeetingHistory.css";
 import React from "react";
+import { rechargeMeetingFee } from "../../api/app";
 
 const { RangePicker } = DatePicker;
 
@@ -26,8 +28,12 @@ const limitDefault = 10;
 const { Panel } = Collapse;
 interface QueriesProps {
   page?: number;
+  from?: string;
+  to?: string;
+  paid?: boolean;
+  unpaid?: boolean;
   isActive?: boolean;
-  limit?: number;
+  isEnded?: boolean;
   roomId?: string;
 }
 
@@ -110,11 +116,38 @@ interface ITabChoose {
 const MeetingHistoryTable = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
+  const [queries, setQueries] = useState<QueriesProps>({} as QueriesProps);
+  const [tabChoose, setTabChoose] = useState<ITabChoose>({
+    ended: false,
+    inMeeting: false,
+    paid: false,
+    unpaid: false,
+  });
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: limitDefault, // Number of items per page
     total: 0, // Total number of items
+  });
+
+  const rechargeMeet = useMutation({
+    mutationKey: ["rechargeMeetingFee"],
+    mutationFn: rechargeMeetingFee,
+    onSuccess: ({ data: newData }) => {
+      message.success("Recharge meeting fee successfully");
+      //update this row
+      // refresh data
+      const newDataList = data.map((item) => {
+        if (item["_id"] === newData._id) {
+          return newData;
+        }
+        return item;
+      });
+      setData(newDataList as never[]);
+    },
+    onError: (error: any) => {
+      console.log(error);
+      message.error(error.response.data.message);
+    },
   });
 
   const { data: meetingHistories, isLoading } = useQuery({
@@ -321,51 +354,99 @@ const MeetingHistoryTable = () => {
           {!meeting.endedAt && <Tag color="green">In meeting</Tag>}
         </div>
         <Divider />
-        <div style={{ fontWeight: 400 }}>
-          <span style={{ marginRight: "20px" }}>
-            Started at: <span>{formatDateTime(meeting.createdAt)}</span>
-          </span>
-          {meeting.endedAt && (
-            <span>
-              Ended at: <span>{formatDateTime(meeting.endedAt)}</span>
-            </span>
-          )}
-        </div>
-        <div>
-          {meeting.endedAt && (
-            <span>
-              Duration:{" "}
-              <span>
-                {getDurationString(
-                  new Date(meeting.endedAt),
-                  new Date(meeting.createdAt)
-                )}
+        <div className="flex w-full">
+          <div className="flex flex-col p-2 w-1/2">
+            <div style={{ fontWeight: 400 }}>
+              <span style={{ marginRight: "20px" }}>
+                Started at: <span>{formatDateTime(meeting.createdAt)}</span>
               </span>
-            </span>
-          )}
-        </div>
-        <div>
-          <span>
-            Access Type:{" "}
-            <span
+              {meeting.endedAt && (
+                <span>
+                  Ended at: <span>{formatDateTime(meeting.endedAt)}</span>
+                </span>
+              )}
+            </div>
+            <div>
+              {meeting.endedAt && (
+                <span>
+                  Duration:{" "}
+                  <span>
+                    {getDurationString(
+                      new Date(meeting.endedAt),
+                      new Date(meeting.createdAt)
+                    )}
+                  </span>
+                </span>
+              )}
+            </div>
+            <div>
+              <span>
+                Access Type:{" "}
+                <span
+                  style={{
+                    textTransform: "capitalize",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {meeting.accessType}
+                </span>
+              </span>
+            </div>
+            <div
               style={{
-                textTransform: "capitalize",
-                fontWeight: "bold",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
               }}
             >
-              {meeting.accessType}
-            </span>
-          </span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ marginRight: "20px" }}>Started by:</span>
-          {renderMember(meeting.createdBy)}
+              <span style={{ marginRight: "20px" }}>Started by:</span>
+              {renderMember(meeting.createdBy)}
+            </div>
+          </div>
+          <div className="flex flex-col p-2 w-1/2">
+            <p>
+              Payment Status: {""}
+              {meeting.status === "paid" ? (
+                <Tag color="green">Paid</Tag>
+              ) : (
+                <Tag color="red">Unpaid</Tag>
+              )}
+              {meeting.status === "unpaid" && (
+                //retry payment button
+                <button
+                  className="btn btn-primary"
+                  style={{
+                    marginLeft: "20px",
+                    outline: "none",
+                    borderRadius: "5px",
+                    padding: "5px 10px",
+                    backgroundColor: "#010085",
+                    color: "#ffffff",
+                  }}
+                  onClick={() => {
+                    rechargeMeet.mutate({ meetingId: meeting._id });
+                  }}
+                >
+                  <ReloadOutlined />
+                  {""} Retry
+                </button>
+              )}
+            </p>
+            {meeting.paymentId && (
+              <p>
+                Payment ID:{" "}
+                <Typography.Text
+                  copyable
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {meeting.paymentId}
+                </Typography.Text>
+              </p>
+            )}
+          </div>
         </div>
       </div>
       <div
@@ -381,32 +462,6 @@ const MeetingHistoryTable = () => {
     </div>
   );
 
-  return (
-    <Spin spinning={isLoading}>
-      <Table
-        className="meeting-history-table"
-        dataSource={data}
-        key="_id"
-        columns={columns}
-        expandable={{
-          expandedRowRender: (record) => renderPanelContent(record),
-          rowExpandable: () => true,
-        }}
-        pagination={pagination}
-        onChange={handleTableChange}
-      />
-    </Spin>
-  );
-};
-
-const TopActions: React.FC = () => {
-  // useEffect set color for tab when tabchoose change
-  const [tabChoose, setTabChoose] = useState<ITabChoose>({
-    ended: false,
-    inMeeting: false,
-    paid: false,
-    unpaid: false,
-  });
   useEffect(() => {
     console.log(tabChoose);
     const { ended, inMeeting, paid, unpaid } = tabChoose;
@@ -479,6 +534,7 @@ const TopActions: React.FC = () => {
         </div>
         <button
           className="tab"
+          style={{ outline: "none" }}
           onClick={() => {
             document.getElementById("filter")?.classList.toggle("hidden");
           }}
@@ -495,6 +551,20 @@ const TopActions: React.FC = () => {
         />
         <RangePicker />
       </div>
+      <Spin spinning={isLoading}>
+        <Table
+          className="meeting-history-table"
+          dataSource={data}
+          key="_id"
+          columns={columns}
+          expandable={{
+            expandedRowRender: (record) => renderPanelContent(record),
+            rowExpandable: () => true,
+          }}
+          pagination={pagination}
+          onChange={handleTableChange}
+        />
+      </Spin>
     </>
   );
 };
@@ -511,7 +581,6 @@ const MeetingHistory: React.FC = () => {
       }}
     >
       <h2 className="my-10">Meeting History</h2>
-      <TopActions />
       <MeetingHistoryTable />
     </div>
   );

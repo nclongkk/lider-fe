@@ -14,3 +14,5 @@ export const getTimeFrequency = () => axiosClient.get('/app/statistics/time-freq
 export const statisticMeeting = ({from, to}: {from: string, to: string}) => axiosClient.get(`/app/statistics/meetings?from=${from}&to=${to}`)
 
 export const getTotalMeeting = () => axiosClient.get('/app/statistics/total')
+
+export const rechargeMeetingFee = ({meetingId}:{meetingId: string}) => axiosClient.post(`/app/users/recharge-meeting-fee` , {id: meetingId})
