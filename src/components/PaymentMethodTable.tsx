@@ -53,6 +53,8 @@ function PaymentMethodTable({
       setDefaultMethodID(data.result.paymentMethodId);
       setCurrentSelectedRecord(null);
       message.success("Switch payment method successfully");
+      // reload window
+      window.location.reload();
     },
   });
   const columns = [
