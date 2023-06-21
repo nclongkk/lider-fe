@@ -47,8 +47,7 @@ const columns = [
         totalAmount =
           record.amount +
           record.amount * record.metadata.service +
-          record.amount * record.metadata.taxCharge +
-          record.amount * record.metadata.bankTransferAmount;
+          record.amount * record.metadata.taxCharge;
       }
       if (record.operator === "+") {
         return <span style={greenStyle}>{totalAmount.toFixed(2)}</span>;
