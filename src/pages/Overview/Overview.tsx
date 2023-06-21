@@ -79,7 +79,7 @@ const Overview: React.FC = () => {
             <p
               style={{
                 color: "black",
-                fontSize: "40px",
+                fontSize: "35px",
                 fontWeight: 800,
                 marginTop: "20px",
               }}
@@ -129,7 +129,7 @@ const Overview: React.FC = () => {
             <p
               style={{
                 color: "black",
-                fontSize: "40px",
+                fontSize: "35px",
                 fontWeight: 800,
                 marginTop: "20px",
               }}
@@ -179,13 +179,13 @@ const Overview: React.FC = () => {
             <p
               style={{
                 color: "black",
-                fontSize: "40px",
+                fontSize: "35px",
                 fontWeight: 800,
                 marginTop: "20px",
               }}
             >
               {totalAmountLoading && <LoadingOutlined />}
-              {totalAmount && (totalAmount["Amount Out"] || 0)}
+              {totalAmount && (totalAmount["Amount Out"].toFixed(1) || 0)}
             </p>
             <p
               style={{
@@ -229,13 +229,13 @@ const Overview: React.FC = () => {
             <p
               style={{
                 color: "black",
-                fontSize: "40px",
+                fontSize: "35px",
                 fontWeight: 800,
                 marginTop: "20px",
               }}
             >
               {totalAmountLoading && <LoadingOutlined />}
-              {totalAmount && totalAmount["Amount In"]}
+              {totalAmount && totalAmount["Amount In"].toFixed(1)}
             </p>
             <p
               style={{
