@@ -177,7 +177,7 @@ const Setting: React.FC = () => {
               >
                 <Steps direction="vertical">
                   <Steps.Step
-                    title="Embed Lider CDN"
+                    title="Embed Lider SDK"
                     description={<EmbedCdn />}
                   ></Steps.Step>
                   <Steps.Step
