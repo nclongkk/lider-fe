@@ -182,7 +182,7 @@ export const SummaryForm = ({ type, handleSubmit }: Props) => {
             height: "3rem",
           }}
           onClick={() => {
-            requestPaymentStripe.mutate({ amount: formValue.total });
+            requestPaymentStripe.mutate({ amount: inputValue });
           }}
           loading={requestPaymentStripe.isLoading}
         >
