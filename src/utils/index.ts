@@ -93,6 +93,7 @@ export const chooseCard = (card) => {
 }
 
 export const getDurationString = (endedAt: Date, createdAt: Date): string => {
+  if (!endedAt || !createdAt) return '';
   const durationInSeconds = Math.abs(endedAt.getTime() - createdAt.getTime()) / 1000;
 
   if (durationInSeconds < 60) {

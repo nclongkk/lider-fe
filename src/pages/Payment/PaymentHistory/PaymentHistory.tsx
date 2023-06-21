@@ -42,11 +42,15 @@ const columns = [
         fontWeight: "bold",
       };
       console.log(record.operator);
-
+      const totalAmount =
+        record.amount +
+        record.amount * record.metadata.service +
+        record.amount * record.metadata.taxCharge +
+        record.amount * record.metadata.bankTransferAmount;
       if (record.operator === "+") {
-        return <span style={greenStyle}>{text}</span>;
+        return <span style={greenStyle}>{totalAmount.toFixed(2)}</span>;
       }
-      return <span style={redStyle}>{text}</span>;
+      return <span style={redStyle}>{totalAmount.toFixed(2)}</span>;
     },
   },
   {
